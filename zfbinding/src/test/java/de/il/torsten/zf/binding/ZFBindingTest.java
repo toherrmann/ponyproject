@@ -39,14 +39,14 @@ class ZFBindingTest {
     private ExchangedDocumentContextType createDocumentContext() {
         ExchangedDocumentContextType docContext = new ExchangedDocumentContextType();
         DocumentContextParameterType urnIdentificator = new DocumentContextParameterType();
-        urnIdentificator.setID(NodeHelper.getIDType(CodeValues.URN_IDENTIFICATOR_16931_2017));
+        urnIdentificator.setID(NodeHelper.createIDType(CodeValues.URN_IDENTIFICATOR_16931_2017));
         docContext.setGuidelineSpecifiedDocumentContextParameter(urnIdentificator);
         return docContext;
     }
 
     private ExchangedDocumentType createDocument() {
         ExchangedDocumentType doc = new ExchangedDocumentType();
-        doc.setID(NodeHelper.getIDType("471102"));
+        doc.setID(NodeHelper.createIDType("471102"));
         DocumentCodeType typeCode = new DocumentCodeType();
         typeCode.setValue("380");
         doc.setTypeCode(typeCode);
@@ -58,7 +58,7 @@ class ZFBindingTest {
 
     private NoteType createNoteWithSubject(String content, String subjectCode) {
         NoteType note = new NoteType();
-        note.setContent(NodeHelper.getTextType(content));
+        note.setContent(NodeHelper.createTextType(content));
         note.setSubjectCode(subjectCode == null ? null : NodeHelper.getCodeType(subjectCode));
         return note;
     }
@@ -78,17 +78,17 @@ class ZFBindingTest {
     private HeaderTradeAgreementType createHeaderTradeAgreement() {
         HeaderTradeAgreementType agreement = new HeaderTradeAgreementType();
         TradePartyType seller = new TradePartyType();
-        seller.getID().add(NodeHelper.getIDType("549910"));
-        seller.getGlobalID().add(NodeHelper.getIDType("4000001123452", "0088"));
-        seller.setName(NodeHelper.getTextType("Lieferant GmbH"));
+        seller.getID().add(NodeHelper.createIDType("549910"));
+        seller.getGlobalID().add(NodeHelper.createIDType("4000001123452", "0088"));
+        seller.setName(NodeHelper.createTextType("Lieferant GmbH"));
         seller.setPostalTradeAddress(createAddress("80333", "Lieferantenstraße 20", "München", "DE"));
         seller.getSpecifiedTaxRegistration().add(createTaxRegistration("FC", "201/113/40209"));
         seller.getSpecifiedTaxRegistration().add(createTaxRegistration("VA", "DE123456789"));
         agreement.setSellerTradeParty(seller);
 
         TradePartyType buyer = new TradePartyType();
-        buyer.getID().add(NodeHelper.getIDType("GE2020211"));
-        buyer.setName(NodeHelper.getTextType("Kunden AG Mitte"));
+        buyer.getID().add(NodeHelper.createIDType("GE2020211"));
+        buyer.setName(NodeHelper.createTextType("Kunden AG Mitte"));
         buyer.setPostalTradeAddress(createAddress("69876", "Kundenstraße 15", "Frankfurt", "DE"));
         agreement.setBuyerTradeParty(buyer);
 
@@ -98,15 +98,15 @@ class ZFBindingTest {
     private TradeAddressType createAddress(String postcode, String lineOne, String city, String country) {
         TradeAddressType address = new TradeAddressType();
         address.setPostcodeCode(NodeHelper.getCodeType(postcode));
-        address.setLineOne(NodeHelper.getTextType(lineOne));
-        address.setCityName(NodeHelper.getTextType(city));
+        address.setLineOne(NodeHelper.createTextType(lineOne));
+        address.setCityName(NodeHelper.createTextType(city));
         address.setCountryID(NodeHelper.getCountryIDType(country));
         return address;
     }
 
     private TaxRegistrationType createTaxRegistration(String schemeID, String id) {
         TaxRegistrationType taxRegistration = new TaxRegistrationType();
-        taxRegistration.setID(NodeHelper.getIDType(id, schemeID));
+        taxRegistration.setID(NodeHelper.createIDType(id, schemeID));
         return taxRegistration;
     }
 
@@ -170,15 +170,15 @@ class ZFBindingTest {
 
     private DocumentLineDocumentType createDocumentLineDocument(String lineID) {
         DocumentLineDocumentType document = new DocumentLineDocumentType();
-        document.setLineID(NodeHelper.getIDType(lineID));
+        document.setLineID(NodeHelper.createIDType(lineID));
         return document;
     }
 
     private TradeProductType createTradeProduct(String globalID, String sellerID, String name) {
         TradeProductType product = new TradeProductType();
-        product.setGlobalID(NodeHelper.getIDType(globalID, "0160"));
-        product.setSellerAssignedID(NodeHelper.getIDType(sellerID));
-        product.setName(NodeHelper.getTextType(name));
+        product.setGlobalID(NodeHelper.createIDType(globalID, "0160"));
+        product.setSellerAssignedID(NodeHelper.createIDType(sellerID));
+        product.setName(NodeHelper.createTextType(name));
         return product;
     }
 

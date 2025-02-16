@@ -15,18 +15,18 @@ public class NodeHelper {
     private NodeHelper() {
     }
 
-    public static IDType getIDType(String value, String schemeID) {
+    public static IDType createIDType(String value, String schemeID) {
         IDType idType = new un.unece.uncefact.data.standard.unqualifieddatatype._100.ObjectFactory().createIDType();
         idType.setValue(value);
         idType.setSchemeID(schemeID);
         return idType;
     }
 
-    public static IDType getIDType(String value) {
-        return getIDType(value, null);
+    public static IDType createIDType(String value) {
+        return createIDType(value, null);
     }
 
-    public static TextType getTextType(String value) {
+    public static TextType createTextType(String value) {
         TextType textType = new un.unece.uncefact.data.standard.unqualifieddatatype._100.ObjectFactory().createTextType();
         textType.setValue(value);
         return textType;

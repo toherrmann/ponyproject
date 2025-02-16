@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50175f66-115b-4478-9421-f02f0a7d90ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/main/java/de/il/torsten/pony/CodeValues.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/main/java/de/il/torsten/pony/DateTimeFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/main/java/de/il/torsten/pony/DocumentType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/main/java/de/il/torsten/pony/NodeHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/main/java/de/il/torsten/pony/UnitType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/test/java/de/il/torsten/zf/binding/DateTimeFormatTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/test/java/de/il/torsten/zf/binding/DefaultNamespacePrefixMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zfbinding/src/test/java/de/il/torsten/zf/binding/ZFBindingTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="50175f66-115b-4478-9421-f02f0a7d90ab" name="Changes" comment="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -251,7 +242,20 @@
       <option name="presentableId" value="Default" />
       <updated>1738749408337</updated>
     </task>
+    <task id="LOCAL-00001" summary="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`">
+      <option name="closed" value="true" />
+      <created>1739719300374</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739719300375</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
