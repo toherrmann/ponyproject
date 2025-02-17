@@ -3,3 +3,11 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ignore Idea project-specific files
+*.iml
+.idea
+
+# Ignore Git project-specific files
+.git
+*.gitattributes

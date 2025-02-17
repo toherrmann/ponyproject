@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50175f66-115b-4478-9421-f02f0a7d90ab" name="Changes" comment="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
+    <list default="true" id="50175f66-115b-4478-9421-f02f0a7d90ab" name="Changes" comment="Füge JUnit-Test `ZFBindingTest` hinzu, um XML-Ausgabe zu erstellen und zu validieren&#10;&#10;- Erstelle Methode `createXml` zur Generierung und Validierung der XML-Ausgabe gegen ein XSD-Schema&#10;- Aktualisiere `NodeHelper`-Methoden, um `createAmountType` zu verwenden&#10;- Implementiere `ZFBindingTest`-Klasse mit Methoden zur Erstellung von Beispiel-Daten und XML-Struktur">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,33 +79,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Build ponyproject.executor": "Run",
-    "Gradle.DateTimeFormatTest.executor": "Run",
-    "Gradle.DateTimeFormatTest.formatDate.executor": "Run",
-    "Gradle.DateTimeFormatTest.formatDateTime.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.FacturXBindingTest.createFacturX.executor": "Run",
-    "Gradle.FacturXBindingTest.executor": "Run",
-    "Gradle.ZFBindingTest.createFacturX.executor": "Run",
-    "Gradle.ZFBindingTest.executor": "Run",
-    "Gradle.ponyproject [build].executor": "Run",
-    "Gradle.ponyproject [clean].executor": "Run",
-    "Gradle.ponyproject [dependencyInsight].executor": "Run",
-    "Gradle.ponyproject [dependencyUpdates].executor": "Run",
-    "JUnit.DateTimeFormatTest.formatDateTime.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.3443396",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build ponyproject.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.DateTimeFormatTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.DateTimeFormatTest.formatDate.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.DateTimeFormatTest.formatDateTime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FacturXBindingTest.createFacturX.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.FacturXBindingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ZFBindingTest.createFacturX.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ZFBindingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ponyproject [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ponyproject [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ponyproject [dependencyInsight].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ponyproject [dependencyUpdates].executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DateTimeFormatTest.formatDateTime.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3443396&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="de.il.torsten.pony" />
@@ -250,12 +253,32 @@
       <option name="project" value="LOCAL" />
       <updated>1739719300375</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Füge JUnit-Test `ZFBindingTest` hinzu, um XML-Ausgabe zu erstellen und zu validieren&#10;&#10;- Erstelle Methode `createXml` zur Generierung und Validierung der XML-Ausgabe gegen ein XSD-Schema&#10;- Aktualisiere `NodeHelper`-Methoden, um `createAmountType` zu verwenden&#10;- Implementiere `ZFBindingTest`-Klasse mit Methoden zur Erstellung von Beispiel-Daten und XML-Struktur">
+      <option name="closed" value="true" />
+      <created>1739720167809</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739720167809</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aktualisiere ZFBindingTest zur Validierung der XML-Ausgabe gegen XSD-Schema&#10;&#10;- Ersetze `NodeHelper.getAmountType` durch `NodeHelper.createAmountType`&#10;- Füge XSD-Schema-Validierung in der `createXml`-Methode hinzu&#10;- Implementiere Validierungs-Event-Handler zur Ausgabe von Validierungsfehlern&#10;- Speichere die XML-Ausgabe in `/tmp/factur-x.xml`" />
+    <MESSAGE value="Füge JUnit-Test `ZFBindingTest` hinzu, um XML-Ausgabe zu erstellen und zu validieren&#10;&#10;- Erstelle Methode `createXml` zur Generierung und Validierung der XML-Ausgabe gegen ein XSD-Schema&#10;- Aktualisiere `NodeHelper`-Methoden, um `createAmountType` zu verwenden&#10;- Implementiere `ZFBindingTest`-Klasse mit Methoden zur Erstellung von Beispiel-Daten und XML-Struktur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Füge JUnit-Test `ZFBindingTest` hinzu, um XML-Ausgabe zu erstellen und zu validieren&#10;&#10;- Erstelle Methode `createXml` zur Generierung und Validierung der XML-Ausgabe gegen ein XSD-Schema&#10;- Aktualisiere `NodeHelper`-Methoden, um `createAmountType` zu verwenden&#10;- Implementiere `ZFBindingTest`-Klasse mit Methoden zur Erstellung von Beispiel-Daten und XML-Struktur" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
