@@ -1,6 +1,8 @@
 Pony Project
 ===================
-Pony project is a Java project, which supports generation e-invoice XML implementing [ZUGFeRD](https://www.ferd-net.de/) specification. It provides JAXB binding classes generated with ZUGFeRD XSDs version 2.3.2.
+Pony project is a Java project, which supports generation e-invoice XML implementing [ZUGFeRD](https://www.ferd-net.de/) specification. 
+It provides JAXB binding classes generated with ZUGFeRD XSDs version 2.3.2. - currently only for so called "EN-16931"
+standard.
 
 ___Hint___: The name ´Pony’ was chosen in reference to the [Mustang](https://github.com/ZUGFeRD/mustangproject) project, which does more complex things on other ways.
 
