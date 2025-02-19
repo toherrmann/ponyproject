@@ -1,6 +1,7 @@
 package de.il.torsten.zf.binding;
 
 import de.il.torsten.pony.CodeValues;
+import de.il.torsten.pony.DefaultNamespacePrefixMapper;
 import de.il.torsten.pony.NodeHelper;
 import jakarta.xml.bind.*;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,11 @@ import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ZFBindingTest {
 
@@ -33,7 +37,9 @@ class ZFBindingTest {
         invoice.setExchangedDocumentContext(createDocumentContext());
         invoice.setExchangedDocument(createDocument());
         invoice.setSupplyChainTradeTransaction(createTransaction());
-        createXml(invoice);
+        String xml = createXml(invoice);
+        assertNotNull(xml);
+        assertFalse(xml.isEmpty());
     }
 
     private ExchangedDocumentContextType createDocumentContext() {
@@ -209,7 +215,7 @@ class ZFBindingTest {
         return settlement;
     }
 
-    private void createXml(final CrossIndustryInvoiceType invoice) throws Exception {
+    private String createXml(final CrossIndustryInvoiceType invoice) throws Exception {
         JAXBContext jbc = JAXBContext.newInstance(CrossIndustryInvoiceType.class);
         Marshaller marshaller = jbc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -221,25 +227,25 @@ class ZFBindingTest {
         marshaller.setSchema(schema);
 
         // Validierungs-Event-Handler hinzufügen
-        marshaller.setEventHandler(new ValidationEventHandler() {
-            @Override
-            public boolean handleEvent(ValidationEvent event) {
-                if (event.getSeverity() != ValidationEvent.WARNING) {
-                    ValidationEventLocator locator = event.getLocator();
-                    System.out.println("Invalid XML: " + event.getMessage());
-                    System.out.println("At line number: " + locator.getLineNumber());
-                    System.out.println("At column number: " + locator.getColumnNumber());
-                }
-                return true;
+        marshaller.setEventHandler(event -> {
+            if (event.getSeverity() != ValidationEvent.WARNING) {
+                ValidationEventLocator locator = event.getLocator();
+                System.out.println("Invalid XML: " + event.getMessage());
+                System.out.println("At line number: " + locator.getLineNumber());
+                System.out.println("At column number: " + locator.getColumnNumber());
             }
+            return true;
         });
 
         JAXBElement<CrossIndustryInvoiceType> xmlRoot = new
                 un.unece.uncefact.data.standard.crossindustryinvoice._100.ObjectFactory().createCrossIndustryInvoice(invoice);
         System.out.println("Here follows XML structure:");
         //marshaller.marshal(xmlRoot, System.out);
-        marshaller.marshal(xmlRoot, new File("/tmp/factur-x.xml"));
 
+        // Marshalling to String
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(xmlRoot, sw);
+        return sw.toString();
 
     }
 }

@@ -4,6 +4,7 @@ plugins {
     id("io.freefair.lombok") version "8.12.1"
     id("com.github.ben-manes.versions") version "0.52.0"
     id("com.github.bjornvester.xjc") version "1.8.2"
+    id("maven-publish")
 }
 
 repositories {
@@ -35,5 +36,22 @@ tasks.named<Test>("test") {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+group = "de.il.torsten"
+version = "2.3.2"
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "local"
+            url = uri("file://${System.getProperty("user.home")}/.m2/repository")
+        }
     }
 }

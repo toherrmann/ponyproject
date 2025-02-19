@@ -1,4 +1,4 @@
-package de.il.torsten.zf.binding;
+package de.il.torsten.pony;
 
 
 import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
