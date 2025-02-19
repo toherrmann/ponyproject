@@ -1,8 +1,6 @@
 package de.il.torsten.zf.binding;
 
-import de.il.torsten.pony.CodeValues;
-import de.il.torsten.pony.DefaultNamespacePrefixMapper;
-import de.il.torsten.pony.NodeHelper;
+import de.il.torsten.pony.*;
 import jakarta.xml.bind.*;
 import org.junit.jupiter.api.Test;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
@@ -25,7 +23,7 @@ class ZFBindingTest {
     private static DateTimeType createDateTime(String date) {
         DateTimeType dateTime = new DateTimeType();
         DateTimeType.DateTimeString dts = new DateTimeType.DateTimeString();
-        dts.setFormat("102");
+        dts.setFormat(DateTimeFormat.DF_102.formatPattern);
         dts.setValue(date);
         dateTime.setDateTimeString(dts);
         return dateTime;
@@ -54,7 +52,7 @@ class ZFBindingTest {
         ExchangedDocumentType doc = new ExchangedDocumentType();
         doc.setID(NodeHelper.createIDType("471102"));
         DocumentCodeType typeCode = new DocumentCodeType();
-        typeCode.setValue("380");
+        typeCode.setValue(DocumentType.getDefault());
         doc.setTypeCode(typeCode);
         doc.setIssueDateTime(createDateTime("20241115"));
         doc.getIncludedNote().add(createNoteWithSubject("Rechnung gemäß Bestellung vom 01.11.2018.", null));
@@ -87,15 +85,15 @@ class ZFBindingTest {
         seller.getID().add(NodeHelper.createIDType("549910"));
         seller.getGlobalID().add(NodeHelper.createIDType("4000001123452", "0088"));
         seller.setName(NodeHelper.createTextType("Lieferant GmbH"));
-        seller.setPostalTradeAddress(createAddress("80333", "Lieferantenstraße 20", "München", "DE"));
-        seller.getSpecifiedTaxRegistration().add(createTaxRegistration("FC", "201/113/40209"));
-        seller.getSpecifiedTaxRegistration().add(createTaxRegistration("VA", "DE123456789"));
+        seller.setPostalTradeAddress(createAddress("80333", "Lieferantenstraße 20", "München", CountryCodes.getDefault()));
+        seller.getSpecifiedTaxRegistration().add(createTaxRegistration(TaxIdTypeCode.FC.name(), "201/113/40209"));
+        seller.getSpecifiedTaxRegistration().add(createTaxRegistration(TaxIdTypeCode.VA.name(), "DE123456789"));
         agreement.setSellerTradeParty(seller);
 
         TradePartyType buyer = new TradePartyType();
         buyer.getID().add(NodeHelper.createIDType("GE2020211"));
         buyer.setName(NodeHelper.createTextType("Kunden AG Mitte"));
-        buyer.setPostalTradeAddress(createAddress("69876", "Kundenstraße 15", "Frankfurt", "DE"));
+        buyer.setPostalTradeAddress(createAddress("69876", "Kundenstraße 15", "Frankfurt", CountryCodes.getDefault()));
         agreement.setBuyerTradeParty(buyer);
 
         return agreement;
@@ -127,8 +125,8 @@ class ZFBindingTest {
     private HeaderTradeSettlementType createHeaderTradeSettlement() {
         HeaderTradeSettlementType settlement = new HeaderTradeSettlementType();
         settlement.setInvoiceCurrencyCode(NodeHelper.getCurrencyCodeType("EUR"));
-        settlement.getApplicableTradeTax().add(createTradeTax(new BigDecimal("19.25"), "VAT", new BigDecimal("275.00"), "S", new BigDecimal("7.00")));
-        settlement.getApplicableTradeTax().add(createTradeTax(new BigDecimal("37.62"), "VAT", new BigDecimal("198.00"), "S", new BigDecimal("19.00")));
+        settlement.getApplicableTradeTax().add(createTradeTax(new BigDecimal("19.25"), TaxTypeCode.getDefault(), new BigDecimal("275.00"), TaxCategoryCode.getDefault(), new BigDecimal("7.00")));
+        settlement.getApplicableTradeTax().add(createTradeTax(new BigDecimal("37.62"), TaxTypeCode.getDefault(), new BigDecimal("198.00"), TaxCategoryCode.getDefault(), new BigDecimal("19.00")));
         settlement.setSpecifiedTradePaymentTerms(createPaymentTerms("20241215"));
         settlement.setSpecifiedTradeSettlementHeaderMonetarySummation(createMonetarySummation(new BigDecimal("473.00"), new BigDecimal("0.00"), new BigDecimal("0.00"), new BigDecimal("473.00"), new BigDecimal("56.87"), new BigDecimal("529.87"), new BigDecimal("0.00"), new BigDecimal("529.87")));
         return settlement;
@@ -156,7 +154,7 @@ class ZFBindingTest {
         summation.setChargeTotalAmount(NodeHelper.createAmountType(chargeTotal));
         summation.setAllowanceTotalAmount(NodeHelper.createAmountType(allowanceTotal));
         summation.setTaxBasisTotalAmount(NodeHelper.createAmountType(taxBasisTotal));
-        summation.getTaxTotalAmount().add(NodeHelper.createAmountType(taxTotal, "EUR"));
+        summation.getTaxTotalAmount().add(NodeHelper.createAmountType(taxTotal, CurrencyCode.getDefault()));
         summation.setGrandTotalAmount(NodeHelper.createAmountType(grandTotal));
         summation.setTotalPrepaidAmount(NodeHelper.createAmountType(totalPrepaid));
         summation.setDuePayableAmount(NodeHelper.createAmountType(duePayable));
@@ -205,8 +203,8 @@ class ZFBindingTest {
     private LineTradeSettlementType createLineTradeSettlement(BigDecimal lineTotal, BigDecimal taxRate) {
         LineTradeSettlementType settlement = new LineTradeSettlementType();
         TradeTaxType tax = new TradeTaxType();
-        tax.setTypeCode(NodeHelper.getTaxCodeType("VAT"));
-        tax.setCategoryCode(NodeHelper.getTaxCategoryCodeType("S"));
+        tax.setTypeCode(NodeHelper.getTaxCodeType(TaxTypeCode.getDefault()));
+        tax.setCategoryCode(NodeHelper.getTaxCategoryCodeType(TaxCategoryCode.getDefault()));
         tax.setRateApplicablePercent(NodeHelper.getPercentType(taxRate));
         settlement.setApplicableTradeTax(tax);
         TradeSettlementLineMonetarySummationType summation = new TradeSettlementLineMonetarySummationType();
@@ -239,8 +237,6 @@ class ZFBindingTest {
 
         JAXBElement<CrossIndustryInvoiceType> xmlRoot = new
                 un.unece.uncefact.data.standard.crossindustryinvoice._100.ObjectFactory().createCrossIndustryInvoice(invoice);
-        System.out.println("Here follows XML structure:");
-        //marshaller.marshal(xmlRoot, System.out);
 
         // Marshalling to String
         StringWriter sw = new StringWriter();

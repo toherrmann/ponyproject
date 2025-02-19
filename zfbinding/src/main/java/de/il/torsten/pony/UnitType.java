@@ -1,5 +1,6 @@
 package de.il.torsten.pony;
 
+@SuppressWarnings("unused")
 public enum UnitType {
     UT_10("group"),
     UT_11("outfit"),

@@ -1,7 +1,6 @@
 package de.il.torsten.pony;
 
-import un.unece.uncefact.data.standard.unqualifieddatatype._100.IDType;
-
+@SuppressWarnings("unused")
 public enum DocumentType {
     DT_71("Request for payment"),
     DT_80("Debit note related to goods or services"),
@@ -64,5 +63,9 @@ public enum DocumentType {
     DocumentType(String aName) {
         this.code = name().split("_")[1];
         this.description = aName;
+    }
+
+    public static String getDefault() {
+        return DT_380.code;
     }
 }
