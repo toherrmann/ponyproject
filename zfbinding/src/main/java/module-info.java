@@ -1,6 +1,7 @@
 module de.il.torsten.zfbinding {
     requires jakarta.annotation;
     requires org.glassfish.jaxb.runtime;
+    requires jakarta.xml.bind;
 
     exports de.il.torsten.pony;
     exports un.unece.uncefact.data.standard.crossindustryinvoice._100;
